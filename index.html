@@ -125,14 +125,32 @@
     .section-row.orange .s-count { color: var(--orange); }
     .section-row.red .s-count { color: var(--red); }
 
-    /* ── Tip ── */
-    .tip {
-      background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(59,130,246,0.06));
-      border: 1px solid rgba(16,185,129,0.25); border-radius: 14px;
-      padding: 18px 20px; margin-bottom: 24px;
+    /* ── Tip cards ── */
+    .tip { margin-bottom: 24px; }
+    .tip-lb { font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+    .tip-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .tip-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px 18px;
+      border-top: 3px solid var(--green);
+      transition: border-color 0.2s;
     }
-    .tip-lb { font-size: 11px; font-weight: 700; color: var(--green); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
-    .tip-tx { font-size: 13.5px; color: var(--text2); line-height: 1.75; }
+    .tip-card:hover { border-color: rgba(16,185,129,0.35); }
+    .tip-card.blue { border-top-color: var(--blue); }
+    .tip-card.blue:hover { border-color: rgba(59,130,246,0.35); }
+    .tip-card.purple { border-top-color: var(--purple); }
+    .tip-card.purple:hover { border-color: rgba(139,92,246,0.35); }
+    .tip-card .tc-icon { font-size: 20px; margin-bottom: 8px; }
+    .tip-card .tc-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+    .tip-card .tc-label.green { color: var(--green); }
+    .tip-card .tc-label.blue { color: var(--blue); }
+    .tip-card .tc-label.purple { color: var(--purple); }
+    .tip-card .tc-text { font-size: 13px; color: var(--text2); line-height: 1.7; }
+    .tip-card .tc-suggestion {
+      margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text3); line-height: 1.6;
+    }
+    .tip-card .tc-suggestion strong { color: var(--text2); font-weight: 600; }
 
     /* ── Footer ── */
     .footer {
@@ -227,6 +245,7 @@
     /* ── Responsive ── */
     @media (max-width: 900px) {
       .stats-grid { grid-template-columns: repeat(3, 1fr); }
+      .tip-cards { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
       .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -283,7 +302,14 @@ var DASHBOARD_DATA = {
     {"title":"信号二：众安\"带病体\"+泰康0免赔双线发力，百万医疗险竞争进入深水区","source":"和讯网/投资者中文网","time":"2026-03","url":"https://wap.eastmoney.com/a/202603133671513912.html","hot":true,"isNew":true},
     {"title":"信号三：好医保、i云保持续领跑互联网经代平台，三方格局分化加速","source":"163财经","time":"2026-03-24","url":"https://www.163.com/dy/article/KOKLNSV00518Q1VT.html","hot":false,"isNew":true}
   ],
-  "tip":"政策层面，商业健康险已上升为国家战略，经代渠道价值凸显；产品层面，众安、泰康、京东安联等多方发力带病体和0免赔两大差异化方向，竞争进入深水区；市场层面，蚂蚁保好医保与i云保领跑互联网经代平台，建议重点关注平安健康险在带病体产品与互联网经代渠道的双重竞争策略。"
+  "tip":{
+    "policy":"商业健康险已上升为国家战略，经代渠道价值凸显。",
+    "policySuggest":"建议重点关注平安健康险在带病体产品与互联网经代渠道的双重竞争策略。",
+    "product":"众安、泰康、京东安联等多方发力带病体和0免赔两大差异化方向，竞争进入深水区。",
+    "productSuggest":"重点关注带病体和0免赔两大方向的产品创新。",
+    "market":"蚂蚁保好医保与i云保领跑互联网经代平台，三方格局分化加速。",
+    "marketSuggest":"持续监测竞品在互联网经代平台的流量和产品策略。"
+  }
 };
 
 var SECTIONS = [
@@ -341,11 +367,54 @@ function renderHome() {
       '<div class="hint">点击查看 →</div></div>';
   }).join('');
 
+  // Parse tip into 3 cards
+  var tip = d.tip;
+  var tipCards = '';
+  if (tip && typeof tip === 'object') {
+    var tips3 = [
+      { icon: '🏛️', label: '政策导向', color: 'green', text: tip.policy || '', suggest: tip.policySuggest || '' },
+      { icon: '💊', label: '产品竞争', color: 'blue', text: tip.product || '', suggest: tip.productSuggest || '' },
+      { icon: '🏪', label: '市场格局', color: 'purple', text: tip.market || '', suggest: tip.marketSuggest || '' }
+    ];
+    tipCards = tips3.map(function(t) {
+      return '<div class="tip-card ' + t.color + '">' +
+        '<div class="tc-icon">' + t.icon + '</div>' +
+        '<div class="tc-label ' + t.color + '">' + t.label + '</div>' +
+        '<div class="tc-text">' + escHtml(t.text) + '</div>' +
+        (t.suggest ? '<div class="tc-suggestion"><strong>→ </strong>' + escHtml(t.suggest) + '</div>' : '') +
+        '</div>';
+    }).join('');
+  } else if (tip && typeof tip === 'string') {
+    // Fallback: try to split by semicolons (policy; product; market)
+    var parts = tip.split('；');
+    if (parts.length < 3) parts = tip.split(';');
+    var defaultLabels = ['🏛️ 政策', '💊 产品', '🏪 市场'];
+    var defaultColors = ['green', 'blue', 'purple'];
+    tipCards = parts.slice(0, 3).map(function(p, i) {
+      var suggest = '';
+      var text = p.trim();
+      if (text.indexOf('建议') >= 0) {
+        var idx = text.indexOf('建议');
+        suggest = text.slice(idx);
+        text = text.slice(0, idx);
+      }
+      return '<div class="tip-card ' + defaultColors[i] + '">' +
+        '<div class="tc-icon">' + defaultLabels[i].split(' ')[0] + '</div>' +
+        '<div class="tc-label ' + defaultColors[i] + '">' + defaultLabels[i].split(' ')[1] + '</div>' +
+        '<div class="tc-text">' + escHtml(text.replace(/^(政策层面|产品层面|市场层面)：?/, '')) + '</div>' +
+        (suggest ? '<div class="tc-suggestion"><strong>→ </strong>' + escHtml(suggest) + '</div>' : '') +
+        '</div>';
+    }).join('');
+  }
+  if (!tipCards) {
+    tipCards = '<div class="tip-card green" style="grid-column:1/-1"><div class="tc-text">暂无点评</div></div>';
+  }
+
   return '<div class="header">' +
     '<div><div class="badge">📋 每日报告</div><h1>保险经代行业日报</h1><div class="sub">健康险 · 三方经代 · 同业情报 · KOL · 热点分析</div></div>' +
     '<div class="header-right"><div class="date">' + escHtml(dateStr) + '</div><div class="time">' + timeStr + '</div></div></div>' +
     '<div class="stats-grid">' + statsHTML + '</div>' +
-    '<div class="tip"><div class="tip-lb">💡 今日点评</div><div class="tip-tx">' + escHtml(d.tip || '暂无点评') + '</div></div>' +
+    '<div class="tip"><div class="tip-lb">💡 今日要点</div><div class="tip-cards">' + tipCards + '</div></div>' +
     '<div class="footer"><a href="javascript:location.reload()">🔄 刷新数据</a><div style="margin-top:10px;">数据来源：公开网络信息 · MaxClaw AI 整理 · 仅供参考</div></div>';
 }
 
