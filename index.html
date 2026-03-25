@@ -391,7 +391,7 @@ function renderHome() {
       { icon: '🏪', label: '市场格局', color: 'purple', text: tip.market || '', suggest: tip.marketSuggest || '' }
     ];
     tipCards = tips3.map(function(t) {
-      return '<div class="tip-card ' + t.color + '">' +
+      return '<div class="tip-card ' + t.color + '" onclick="showTipDetail(' + i + ')" style="cursor:pointer" role="button" aria-label="查看' + t.label + '详情">'
         '<div class="tc-icon">' + t.icon + '</div>' +
         '<div class="tc-label ' + t.color + '">' + t.label + '</div>' +
         '<div class="tc-text">' + escHtml(t.text) + '</div>' +
@@ -424,6 +424,13 @@ function renderHome() {
     tipCards = '<div class="tip-card green" style="grid-column:1/-1"><div class="tc-text">暂无点评</div></div>';
   }
 
+
+  window.__TIP_DATA__ = [
+    { text: tip.policy || '', suggest: tip.policySuggest || '', links: (d.tip.policyLinks || []) },
+    { text: tip.product || '', suggest: tip.productSuggest || '', links: (d.tip.productLinks || []) },
+    { text: tip.market || '', suggest: tip.marketSuggest || '', links: (d.tip.marketLinks || []) }
+  ];
+
   return '<div class="header">' +
     '<div><div class="badge">📋 每日报告</div><h1>保险经代行业日报</h1><div class="sub">健康险 · 三方经代 · 同业情报 · KOL · 热点分析</div></div>' +
     '<div class="header-right"><div class="date">' + escHtml(dateStr) + '</div><div class="time" id="reportTime"></div></div></div>' +
@@ -455,6 +462,13 @@ function renderDetail(sec) {
         '<div class="dc-tags">' + tags + '</div>' + linkHTML + '</div></div>';
   }).join('') : '<div class="empty-state">暂无内容</div>';
 
+
+  window.__TIP_DATA__ = [
+    { text: tip.policy || '', suggest: tip.policySuggest || '', links: (d.tip.policyLinks || []) },
+    { text: tip.product || '', suggest: tip.productSuggest || '', links: (d.tip.productLinks || []) },
+    { text: tip.market || '', suggest: tip.marketSuggest || '', links: (d.tip.marketLinks || []) }
+  ];
+
   return '<div class="header">' +
     '<div><div class="badge">📋 每日报告</div><h1>保险经代行业日报</h1><div class="sub">健康险 · 三方经代 · 同业情报 · KOL · 热点分析</div></div>' +
     '<div class="header-right"><div class="date">' + escHtml(dateStr) + '</div><div class=\"time\" id=\"reportTime\"></div></div></div>' +
@@ -479,5 +493,62 @@ function escAttr(s) {
 render();
 startClock();
 </script>
+
+<!-- Tip detail modal -->
+<div id="tipModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:2000;align-items:center;justify-content:center;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);padding:20px;" onclick="closeTipModal(event)">
+  <div style="background:#141418;border:1px solid #1f2d45;border-radius:16px;max-width:600px;width:100%;max-height:85vh;overflow-y:auto;padding:28px 28px 24px;box-shadow:0 25px 50px rgba(0,0,0,0.4);" onclick="event.stopPropagation()">
+    <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:18px;" id="tipModalHd">
+      <div id="tipModalIcon" style="font-size:28px;flex-shrink:0;"></div>
+      <div style="flex:1;">
+        <div id="tipModalTitle" style="font-size:17px;font-weight:700;color:#f1f5f9;line-height:1.4;margin-bottom:6px;"></div>
+        <div id="tipModalSub" style="font-size:12px;color:#64748b;"></div>
+      </div>
+      <button onclick="closeTipModal()" style="background:#1f2d45;border:none;color:#94a3b8;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:16px;flex-shrink:0;">✕</button>
+    </div>
+    <div id="tipModalBody" style="font-size:14px;line-height:1.75;color:#94a3b8;"></div>
+  </div>
+</div>
+<script>
+function showTipDetail(idx) {
+  var data = window.__TIP_DATA__;
+  if (!data || !data[idx]) return;
+  var item = data[idx];
+  var colors = {0:"#10b981",1:"#3b82f6",2:"#8b5cf6"};
+  var icons = {0:"🏛️",1:"💊",2:"🏪"};
+  var labels = {0:"政策导向",1:"产品竞争",2:"市场格局"};
+  var iconsEl = document.getElementById("tipModalIcon");
+  iconsEl.textContent = icons[idx] || "📌";
+  iconsEl.style.background = (colors[idx] || "#10b981") + "22";
+  iconsEl.style.width = "48px"; iconsEl.style.height = "48px";
+  iconsEl.style.borderRadius = "12px";
+  iconsEl.style.display = "flex"; iconsEl.style.alignItems = "center"; iconsEl.style.justifyContent = "center";
+  document.getElementById("tipModalTitle").textContent = labels[idx] || "详情";
+  document.getElementById("tipModalSub").textContent = new Date().toLocaleDateString("zh-CN",{year:"numeric",month:"long",day:"numeric"});
+  var body = document.getElementById("tipModalBody");
+  var html = "<div style='margin-bottom:16px;padding:14px 16px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid " + (colors[idx] || "#10b981") + ";font-size:14px;color:#94a3b8;line-height:1.75;'>" + item.text + "</div>";
+  if (item.suggest) {
+    html += "<div style='margin-bottom:16px;'><div style='font-size:11px;font-weight:700;color:#64748b;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;'>→ 建议</div><div style='font-size:14px;color:#94a3b8;line-height:1.7;'>" + item.suggest + "</div></div>";
+  }
+  if (item.links && item.links.length) {
+    html += "<div><div style='font-size:11px;font-weight:700;color:#64748b;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;'>来源</div>";
+    item.links.forEach(function(l) {
+      html += "<a href='" + l.url + "' target='_blank' style='display:flex;align-items:center;gap:8px;padding:10px 12px;background:rgba(255,255,255,0.02);border-radius:8px;margin-bottom:6px;color:#3b82f6;text-decoration:none;font-size:13px;transition:background 0.15s;' onmouseover="this.style.background='rgba(59,130,246,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.02)'">";
+      html += "<span style='flex:1;'>" + l.title + "</span><span style='font-size:11px;color:#64748b;'>→</span></a>";
+    });
+    html += "</div>";
+  }
+  body.innerHTML = html;
+  var modal = document.getElementById("tipModal");
+  modal.style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+function closeTipModal(e) {
+  if (e && e.target !== e.currentTarget) return;
+  document.getElementById("tipModal").style.display = "none";
+  document.body.style.overflow = "";
+}
+document.addEventListener("keydown", function(e){ if(e.key==="Escape") closeTipModal(); });
+</script>
+
 </body>
 </html>
