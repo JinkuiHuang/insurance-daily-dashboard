@@ -52,9 +52,9 @@
     /* ── Stats grid ── */
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-bottom: 24px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
     }
     .stat-card {
       background: var(--card);
@@ -225,19 +225,20 @@
     .empty-state { text-align: center; padding: 60px 0; color: var(--text3); font-size: 14px; }
 
     /* ── Responsive ── */
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
+      .stats-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 600px) {
       .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-      .stat-card .num { font-size: 48px; }
-      .detail-header { flex-wrap: wrap; }
+      .stat-card .num { font-size: 44px; }
+      .detail-header { flex-wrap: wrap; gap: 10px; }
       .detail-header .count-badge { display: none; }
     }
-    @media (max-width: 480px) {
-      body { padding: 14px 12px 40px; }
+    @media (max-width: 400px) {
       .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-      .stat-card { padding: 16px 10px; }
-      .stat-card .num { font-size: 40px; }
-      .section-row { padding: 12px 14px; }
-      .section-row .s-count { font-size: 22px; }
+      .stat-card { padding: 14px 8px; }
+      .stat-card .num { font-size: 36px; }
+      .stat-card .label { font-size: 11px; }
     }
   </style>
 </head>
@@ -331,28 +332,19 @@ function renderHome() {
   var dateStr = d.date || now.toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric',weekday:'long'});
   var timeStr = now.toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'});
   var n = [d.stats.n1, d.stats.n2, d.stats.n3, d.stats.n4, d.stats.n5 || d.insights.length];
-  var names = ['健康险要闻','三方经代','同业情报','KOL内容','热点分析'];
+  var names = ['健康险要闻','三方经代','同业情报','KOL内容','热点发现'];
 
   var statsHTML = SECTIONS.map(function(s, i) {
-    return '<div class="stat-card ' + s.color + '" onclick="navigate(\'' + s.key + '\')" role="button" aria-label="查看' + s.label + '">' +
+    return '<div class="stat-card ' + s.color + '" onclick="navigate(\'' + s.key + '\')" role="button" aria-label="查看' + names[i] + '">' +
       '<div class="num">' + (n[i] || 0) + '</div>' +
       '<div class="label">' + names[i] + '</div>' +
       '<div class="hint">点击查看 →</div></div>';
-  }).join('');
-
-  var rowsHTML = SECTIONS.map(function(s, i) {
-    return '<div class="section-row ' + s.color + '" onclick="navigate(\'' + s.key + '\')" role="button">' +
-      '<div class="s-ico">' + (s.label.split(' ')[0]) + '</div>' +
-      '<div class="s-info"><div class="s-name">' + s.label + '</div><div class="s-sub">' + s.sub + '</div></div>' +
-      '<div class="s-count">' + (n[i] || 0) + ' 条</div>' +
-      '<div class="s-arrow">→</div></div>';
   }).join('');
 
   return '<div class="header">' +
     '<div><div class="badge">📋 每日报告</div><h1>保险经代行业日报</h1><div class="sub">健康险 · 三方经代 · 同业情报 · KOL · 热点分析</div></div>' +
     '<div class="header-right"><div class="date">' + escHtml(dateStr) + '</div><div class="time">' + timeStr + '</div></div></div>' +
     '<div class="stats-grid">' + statsHTML + '</div>' +
-    '<div class="section-list">' + rowsHTML + '</div>' +
     '<div class="tip"><div class="tip-lb">💡 今日点评</div><div class="tip-tx">' + escHtml(d.tip || '暂无点评') + '</div></div>' +
     '<div class="footer"><a href="javascript:location.reload()">🔄 刷新数据</a><div style="margin-top:10px;">数据来源：公开网络信息 · MaxClaw AI 整理 · 仅供参考</div></div>';
 }
