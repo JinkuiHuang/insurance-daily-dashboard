@@ -324,6 +324,20 @@ var STAT_COLORS = ['green','blue','purple','orange','red'];
 var d = DASHBOARD_DATA;
 var now = new Date();
 
+// ── Live clock ──
+var _clockTimer = null;
+function startClock() {
+  if (_clockTimer) clearInterval(_clockTimer);
+  _clockTimer = setInterval(function() {
+    var el = document.getElementById('reportTime');
+    if (el) el.textContent = new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  }, 1000);
+}
+function updateClock() {
+  var el = document.getElementById('reportTime');
+  if (el) el.textContent = new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
+
 // ── Router ──
 function getPage() {
   var p = location.search.match(/page=(\w+)/);
@@ -334,6 +348,7 @@ function navigate(page) {
   if (history.pushState) history.pushState(null, '', '?page=' + page);
   else location.search = '?page=' + page;
   render();
+  startClock();
   window.scrollTo(0, 0);
 }
 
@@ -355,8 +370,7 @@ function render() {
 
 // ── Home ──
 function renderHome() {
-  var dateStr = d.date || now.toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric',weekday:'long'});
-  var timeStr = now.toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'});
+  var dateStr = d.date || new Date().toLocaleDateString("zh-CN",{year:"numeric",month:"long",day:"numeric",weekday:"long"});
   var n = [d.stats.n1, d.stats.n2, d.stats.n3, d.stats.n4, d.stats.n5 || d.insights.length];
   var names = ['健康险要闻','三方经代','同业情报','KOL内容','热点发现'];
 
@@ -412,7 +426,7 @@ function renderHome() {
 
   return '<div class="header">' +
     '<div><div class="badge">📋 每日报告</div><h1>保险经代行业日报</h1><div class="sub">健康险 · 三方经代 · 同业情报 · KOL · 热点分析</div></div>' +
-    '<div class="header-right"><div class="date">' + escHtml(dateStr) + '</div><div class="time">' + timeStr + '</div></div></div>' +
+    '<div class="header-right"><div class="date">' + escHtml(dateStr) + '</div><div class="time" id="reportTime"></div></div></div>' +
     '<div class="stats-grid">' + statsHTML + '</div>' +
     '<div class="tip"><div class="tip-lb">💡 今日要点</div><div class="tip-cards">' + tipCards + '</div></div>' +
     '<div class="footer"><a href="javascript:location.reload()">🔄 刷新数据</a><div style="margin-top:10px;">数据来源：公开网络信息 · MaxClaw AI 整理 · 仅供参考</div></div>';
@@ -443,7 +457,7 @@ function renderDetail(sec) {
 
   return '<div class="header">' +
     '<div><div class="badge">📋 每日报告</div><h1>保险经代行业日报</h1><div class="sub">健康险 · 三方经代 · 同业情报 · KOL · 热点分析</div></div>' +
-    '<div class="header-right"><div class="date">' + escHtml(dateStr) + '</div><div class="time">' + now.toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'}) + '</div></div></div>' +
+    '<div class="header-right"><div class="date">' + escHtml(dateStr) + '</div><div class=\"time\" id=\"reportTime\"></div></div></div>' +
     '<div class="detail-header ' + color + '">' +
       '<div class="back-btn" onclick="navigate(\'home\')" role="button"><span class="arrow">←</span>返回</div>' +
       '<div class="s-ico">' + sec.label.split(' ')[0] + '</div>' +
@@ -463,6 +477,7 @@ function escAttr(s) {
 }
 
 render();
+startClock();
 </script>
 </body>
 </html>
