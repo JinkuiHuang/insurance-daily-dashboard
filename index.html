@@ -29,8 +29,10 @@
     }
     a { color: inherit; text-decoration: none; }
 
+    /* ── Page wrap ── */
     .page { max-width: 1100px; margin: 0 auto; }
 
+    /* ── Header ── */
     .header {
       display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap;
       gap: 12px; margin-bottom: 24px; padding-bottom: 18px;
@@ -47,6 +49,7 @@
     .header-right .date { font-size: 13px; color: var(--text2); }
     .header-right .time { font-size: 22px; font-weight: 700; color: var(--green); margin-top: 4px; }
 
+    /* ── Stats grid ── */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -91,6 +94,7 @@
     .stat-card .hint { font-size: 11px; color: var(--text3); margin-top: 4px; opacity: 0; transition: opacity 0.2s; }
     .stat-card:hover .hint { opacity: 1; }
 
+    /* ── Section list (home) ── */
     .section-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
     .section-row {
       display: flex; align-items: center; gap: 14px;
@@ -108,6 +112,7 @@
     .s-blue .s-ico { background: rgba(59,130,246,0.15); }
     .s-purple .s-ico { background: rgba(139,92,246,0.15); }
     .s-orange .s-ico { background: rgba(245,158,11,0.15); }
+    .s-red .s-ico { background: rgba(239,68,68,0.15); }
     .section-row .s-info { flex: 1; min-width: 0; }
     .section-row .s-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
     .section-row .s-sub { font-size: 12px; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -118,7 +123,9 @@
     .section-row.blue .s-count { color: var(--blue); }
     .section-row.purple .s-count { color: var(--purple); }
     .section-row.orange .s-count { color: var(--orange); }
+    .section-row.red .s-count { color: var(--red); }
 
+    /* ── Tip cards ── */
     .tip { margin-bottom: 24px; }
     .tip-lb { font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
     .tip-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
@@ -145,6 +152,7 @@
     }
     .tip-card .tc-suggestion strong { color: var(--text2); font-weight: 600; }
 
+    /* ── Footer ── */
     .footer {
       text-align: center; padding-top: 20px; border-top: 1px solid var(--border);
       font-size: 11px; color: var(--text3); margin-top: 8px;
@@ -157,6 +165,9 @@
     }
     .footer a:hover { border-color: var(--blue); color: var(--blue); }
 
+    /* ═══════════════════════════════════
+       DETAIL PAGE
+    ═══════════════════════════════════ */
     .detail-header {
       display: flex; align-items: center; gap: 14px;
       margin-bottom: 24px; padding-bottom: 18px;
@@ -180,6 +191,7 @@
     .detail-header.blue .s-ico { background: rgba(59,130,246,0.15); }
     .detail-header.purple .s-ico { background: rgba(139,92,246,0.15); }
     .detail-header.orange .s-ico { background: rgba(245,158,11,0.15); }
+    .detail-header.red .s-ico { background: rgba(239,68,68,0.15); }
     .detail-header .info { flex: 1; }
     .detail-header .name { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
     .detail-header .sub { font-size: 12px; color: var(--text3); }
@@ -188,286 +200,367 @@
       border-radius: 20px; padding: 4px 14px; font-size: 13px; color: var(--text2);
     }
 
-    .news-item {
-      display: flex; align-items: center; gap: 14px;
+    /* Detail cards */
+    .detail-cards { display: flex; flex-direction: column; gap: 12px; }
+    .detail-card {
       background: var(--card); border: 1px solid var(--border);
-      border-radius: 12px; padding: 14px 18px;
-      cursor: pointer; transition: all 0.15s;
+      border-radius: 12px; padding: 18px 20px; transition: all 0.15s;
+    }
+    .detail-card:hover { border-color: rgba(255,255,255,0.15); background: var(--card-hover); }
+    .detail-card .dc-top { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+    .detail-card .dc-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800; flex-shrink: 0; margin-top: 2px;
+    }
+    .detail-card.green .dc-num { background: rgba(16,185,129,0.15); color: var(--green); }
+    .detail-card.blue .dc-num { background: rgba(59,130,246,0.15); color: var(--blue); }
+    .detail-card.purple .dc-num { background: rgba(139,92,246,0.15); color: var(--purple); }
+    .detail-card.orange .dc-num { background: rgba(245,158,11,0.15); color: var(--orange); }
+    .detail-card.red .dc-num { background: rgba(239,68,68,0.15); color: var(--red); }
+    .detail-card .dc-title { font-size: 14px; font-weight: 700; line-height: 1.5; flex: 1; }
+    .detail-card .dc-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; padding-left: 40px; }
+    .detail-card .dc-meta .src { font-size: 11px; font-weight: 700; }
+    .detail-card .dc-meta .tm { font-size: 11px; color: var(--text3); }
+    .detail-card .dc-desc {
+      font-size: 13px; color: var(--text2); line-height: 1.7;
+      padding: 12px 16px; background: rgba(255,255,255,0.02);
+      border-radius: 8px; border-left: 3px solid var(--border);
       margin-bottom: 10px;
     }
-    .news-item:hover { background: var(--card-hover); border-color: rgba(255,255,255,0.2); transform: translateX(4px); }
-    .ni-num {
-      width: 28px; height: 28px; border-radius: 8px;
-      background: rgba(255,255,255,0.06);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 700; color: var(--text3);
-      flex-shrink: 0;
+    .detail-card .dc-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-left: 40px; }
+    .detail-card .dc-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 6px; }
+    .tag-hot { background: rgba(245,158,11,0.15); color: var(--orange); }
+    .tag-new { background: rgba(16,185,129,0.15); color: var(--green); }
+    .detail-card .dc-link {
+      font-size: 12px; color: var(--blue); text-decoration: none; font-weight: 600;
+      display: flex; align-items: center; gap: 4px; transition: opacity 0.15s;
     }
-    .ni-body { flex: 1; min-width: 0; }
-    .ni-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
-    .ni-meta { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text3); }
-    .ni-source { color: var(--text3); font-weight: 500; }
-    .ni-dot { color: var(--text3); }
-    .ni-time { color: var(--text3); }
-    .ni-arrow { font-size: 20px; color: var(--text3); flex-shrink: 0; transition: transform 0.15s; }
-    .news-item:hover .ni-arrow { transform: translateX(3px); color: var(--text2); }
+    .detail-card .dc-link:hover { opacity: 0.75; }
 
-    .page-detail, .page-home { display: none; }
-    .page-active { display: block; }
+    /* Empty state */
+    .empty-state { text-align: center; padding: 60px 0; color: var(--text3); font-size: 14px; }
 
-    .section-detail-wrap { display: none; }
-    .section-detail-wrap.active { display: block; }
-
-    @media (max-width: 640px) {
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
       .stats-grid { grid-template-columns: repeat(3, 1fr); }
-      .stat-card .num { font-size: 48px; }
       .tip-cards { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .stat-card .num { font-size: 44px; }
+      .detail-header { flex-wrap: wrap; gap: 10px; }
+      .detail-header .count-badge { display: none; }
+    }
+    @media (max-width: 400px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .stat-card { padding: 14px 8px; }
+      .stat-card .num { font-size: 36px; }
+      .stat-card .label { font-size: 11px; }
     }
   </style>
 </head>
 <body>
-  <div class="page page-home page-active" id="page-home">
-    <div class="header">
-      <div>
-        <div class="badge">🏦 保险经代 · 每日动态</div>
-        <h1>保险经代行业日报</h1>
-        <div class="sub">覆盖健康险 · 三方经代 · 同业竞品 · 行业洞察</div>
-      </div>
-      <div class="header-right">
-        <div class="date" id="hdr-date"></div>
-        <div class="time" id="hdr-time"></div>
-      </div>
-    </div>
+<div class="page" id="app"></div>
 
-    <div class="stats-grid">
-      <div class="stat-card green" onclick="showSection('health')">
-        <div class="num" id="stat-n1">0</div>
-        <div class="label">健康险要闻</div>
-        <div class="hint">点击查看详情</div>
-      </div>
-      <div class="stat-card blue" onclick="showSection('agent')">
-        <div class="num" id="stat-n2">0</div>
-        <div class="label">三方经代</div>
-        <div class="hint">点击查看详情</div>
-      </div>
-      <div class="stat-card purple" onclick="showSection('comp')">
-        <div class="num" id="stat-n3">0</div>
-        <div class="label">同业情报</div>
-        <div class="hint">点击查看详情</div>
-      </div>
-      <div class="stat-card orange" onclick="showSection('kol')">
-        <div class="num" id="stat-n4">0</div>
-        <div class="label">KOL内容</div>
-        <div class="hint">点击查看详情</div>
-      </div>
-      <div class="stat-card red" onclick="showSection('insights')">
-        <div class="num">5</div>
-        <div class="label">热点信号</div>
-        <div class="hint">点击查看详情</div>
-      </div>
-    </div>
+<script>
+var DASHBOARD_DATA = {
+  "date": "2026年3月25日 星期三",
+  "stats": {"n1":5,"n2":5,"n3":8,"n4":3,"n5":3},
+  "healthNews": [
+    {"title":"政策强信号！商业健康险迎来规模增长新契机","source":"新浪财经","time":"2026-03-16","url":"https://finance.sina.com.cn/jjxw/2026-03-16/doc-inhreeev8838938.shtml","hot":true,"isNew":true},
+    {"title":"金融监管总局推动健康保险高质量发展指导意见出台","source":"国家金融监管总局","time":"2026-03-07","url":"http://finance.people.com.cn/n1/2026/0307/c1004-40676730.html","hot":true,"isNew":false},
+    {"title":"2026年31省市保险行业政策汇总：商业医疗保险纳入国家战略","source":"新浪财经","time":"2026-03-24","url":"https://finance.sina.com.cn/roll/2026-03-24/doc-inhsarra0555792.shtml","hot":true,"isNew":true},
+    {"title":"多地2026版惠民保产品出炉，保障升级成主旋律","source":"新浪财经","time":"2026-03-25","url":"https://cj.sina.cn/articles/view/7857141524/1d452771401901prds","hot":true,"isNew":true},
+    {"title":"百元保费再升级：2026惠民保扩大特药目录、降低理赔门槛","source":"中国新闻网","time":"2026-01-03","url":"https://www.chinanews.com.cn/m/sh/2026/01-03/10544999.shtml","hot":false,"isNew":false}
+  ],
+  "agentNews": [
+    {"title":"2026全国保险中介综合服务实力前十排名发布","source":"知乎","time":"2026-01-15","url":"https://zhuanlan.zhihu.com/p/1995086089866716575","hot":true,"isNew":false},
+    {"title":"保险中介四强争霸：明亚大童泛华永达理十年鏖战格局分析","source":"中商管理","time":"2025-07-02","url":"https://sino-manager.com/detail/12998","hot":true,"isNew":false},
+    {"title":"i云保定义2026年线上保险平台发展标准，综合服务口碑领先","source":"163财经","time":"2026-03-24","url":"https://www.163.com/dy/article/KOKLNSV00518Q1VT.html","hot":true,"isNew":true},
+    {"title":"永达理专注高端市场：师徒制团队13个月留存率45%","source":"中商管理","time":"2025-07-02","url":"https://sino-manager.com/detail/12998","hot":false,"isNew":false},
+    {"title":"明亚人均产能18.7万元，大童科技赋能持续领跑","source":"新浪财经","time":"2025-06-27","url":"https://finance.sina.com.cn/roll/2025-06-27/doc-infcptny3552703.shtml","hot":false,"isNew":false}
+  ],
+  "compNews": [
+    {"title":"众安保险发布\"众民保·中高端医疗险2026\"：深耕带病体保障，0免赔+直付","source":"和讯网","time":"2026-03-12","url":"http://insurance.hexun.com/2026-03-12/223681193.html","hot":true,"isNew":true},
+    {"title":"众安保险：将继续深耕带病人群健康险赛道，填补市场空白","source":"东方财富","time":"2026-03-13","url":"https://wap.eastmoney.com/a/202603133671513912.html","hot":true,"isNew":true},
+    {"title":"泰康在线启动2026年\"3·15\"金融消费者权益保护宣传","source":"泰康在线","time":"2026-03-13","url":"https://tk.cn/tkcms/publish/article/detail/716/922185_0.html","hot":true,"isNew":true},
+    {"title":"泰康在线泰爱保百万医疗险（全民版）：可选0免赔，保障全面","source":"投资者中文网","time":"2026-03-24","url":"http://www.investorscn.com/2026/03/24/128168/","hot":false,"isNew":true},
+    {"title":"京东安联臻爱无限医疗保险（互联网2026版）：600万高保额，外购药不限清单，既往症可保可赔","source":"慧择网","time":"2026-03-15","url":"https://www.huize.com/product/detail-103995.html","hot":true,"isNew":true},
+    {"title":"蚂蚁保好医保系列：互联网健康险市场最热门产品之一","source":"搜狐","time":"2026-02-25","url":"https://www.sohu.com/a/989950387_122606230","hot":true,"isNew":false},
+    {"title":"百万医疗险三强对比：众安 vs 太平洋蓝医保 vs 复星联合差异化升级","source":"界面新闻","time":"2026-03-15","url":"https://www.jiemian.com/article/14116229.html","hot":false,"isNew":true},
+    {"title":"i云保定义2026年线上保险平台标准，年金险综合服务口碑领先","source":"163财经","time":"2026-03-24","url":"https://www.163.com/dy/article/KOKLNSV00518Q1VT.html","hot":false,"isNew":true}
+  ],
+  "kolNews": [
+    {"title":"2026年保险公司十大排名解读：买保险先选公司还是先选产品？","source":"知乎","time":"2026-03-20","url":"https://www.zhihu.com/tardis/bd/art/708215817","hot":true,"isNew":true},
+    {"title":"商业医疗保险行业市场规模分析：2026-2032年投资机会评估","source":"搜狐","time":"2026-02-11","url":"https://www.sohu.com/a/986197187_120113054","hot":false,"isNew":false},
+    {"title":"两会建言落地：商业健康险服务升级成热点议题","source":"人民网","time":"2026-03-07","url":"http://finance.people.com.cn/n1/2026/0307/c1004-40676730.html","hot":true,"isNew":false}
+  ],
+  "insights": [
+    {"title":"信号一：监管明确\"构建全覆盖、多层次商业医疗保险产品体系\"，商保定位升至国家战略","source":"国家金融监管总局","time":"2026-03","url":"http://finance.people.com.cn/n1/2026/0307/c1004-40676730.html","hot":true,"isNew":true},
+    {"title":"信号二：众安\"带病体\"+泰康0免赔双线发力，百万医疗险竞争进入深水区","source":"和讯网/投资者中文网","time":"2026-03","url":"https://wap.eastmoney.com/a/202603133671513912.html","hot":true,"isNew":true},
+    {"title":"信号三：好医保、i云保持续领跑互联网经代平台，三方格局分化加速","source":"163财经","time":"2026-03-24","url":"https://www.163.com/dy/article/KOKLNSV00518Q1VT.html","hot":false,"isNew":true}
+  ],
+  "tip":{
+    "policy":"商业健康险已上升为国家战略，监管明确构建全覆盖、多层次商业医疗保险产品体系，经代渠道价值凸显。",
+    "policySuggest":"建议重点关注平安健康险在带病体产品与互联网经代渠道的双重竞争策略。",
+    "policyLinks":[
+      {"title":"国家金融监管总局推动健康保险高质量发展指导意见","url":"http://finance.people.com.cn/n1/2026/0307/c1004-40676730.html"},
+      {"title":"商业医疗保险纳入国家战略——2026年31省市政策汇总","url":"https://finance.sina.com.cn/roll/2026-03-24/doc-inhsarra0555792.shtml"}
+    ],
+    "product":"众安、泰康、京东安联等多方发力带病体和0免赔两大差异化方向，竞争进入深水区；蓝医保慢病版上市填补市场空白。",
+    "productSuggest":"重点关注带病体和0免赔两大方向的产品创新，平安健康险差异化竞争策略待加强。",
+    "productLinks":[
+      {"title":"众安发布众民保·中高端医疗险2026","url":"http://insurance.hexun.com/2026-03-12/223681193.html"},
+      {"title":"百万医疗险三强对比：众安 vs 蓝医保 vs 复星联合","url":"https://www.jiemian.com/article/14116229.html"}
+    ],
+    "market":"蚂蚁保好医保与i云保领跑互联网经代平台，三方格局分化加速，明亚、大童持续深化科技赋能。",
+    "marketSuggest":"持续监测竞品在互联网经代平台的流量和产品策略，优化我司渠道合作方案。",
+    "marketLinks":[
+      {"title":"i云保定义2026年线上保险平台发展标准","url":"https://www.163.com/dy/article/KOKLNSV00518Q1VT.html"},
+      {"title":"保险中介四强争霸：明亚大童泛华永达理十年鏖战","url":"https://sino-manager.com/detail/12998"}
+    ]
+  }
+};
 
-    <div class="section-list">
-      <div class="section-row s-green" onclick="showSection('health')">
-        <div class="s-ico">🏥</div>
-        <div class="s-info">
-          <div class="s-name">健康险市场要闻</div>
-          <div class="s-sub" id="sub-health"></div>
-        </div>
-        <div class="s-count" id="cnt-health">0</div>
-        <div class="s-arrow">›</div>
-      </div>
-      <div class="section-row s-blue" onclick="showSection('agent')">
-        <div class="s-ico">🔍</div>
-        <div class="s-info">
-          <div class="s-name">三方经代生态</div>
-          <div class="s-sub" id="sub-agent"></div>
-        </div>
-        <div class="s-count" id="cnt-agent">0</div>
-        <div class="s-arrow">›</div>
-      </div>
-      <div class="section-row s-purple" onclick="showSection('comp')">
-        <div class="s-ico">🏢</div>
-        <div class="s-info">
-          <div class="s-name">同业竞争情报</div>
-          <div class="s-sub" id="sub-comp"></div>
-        </div>
-        <div class="s-count" id="cnt-comp">0</div>
-        <div class="s-arrow">›</div>
-      </div>
-      <div class="section-row s-orange" onclick="showSection('kol')">
-        <div class="s-ico">📱</div>
-        <div class="s-info">
-          <div class="s-name">KOL影响力内容</div>
-          <div class="s-sub" id="sub-kol"></div>
-        </div>
-        <div class="s-count" id="cnt-kol">0</div>
-        <div class="s-arrow">›</div>
-      </div>
-    </div>
+var SECTIONS = [
+  { key: 'health', label: '🏥 健康险市场要闻', sub: '政策 / 产品 / 数据', color: 'green', dataKey: 'healthNews' },
+  { key: 'agent',  label: '🔍 三方经代生态',   sub: '明亚 · 大童 · 保通 · 永达理', color: 'blue',   dataKey: 'agentNews' },
+  { key: 'comp',   label: '🏢 同业竞争情报',   sub: '众安 · 泰康在线 · 太平洋健康', color: 'purple', dataKey: 'compNews' },
+  { key: 'kol',    label: '📱 KOL 影响力内容', sub: '大V观点 / 热门视频 / 深度文章', color: 'orange', dataKey: 'kolNews' },
+  { key: 'insight',label: '💡 热点发现',       sub: '今日关键词 / 信号识别 / 趋势研判', color: 'red',  dataKey: 'insights' }
+];
 
-    <div class="tip">
-      <div class="tip-lb">💡 热点发现 &amp; 行业分析</div>
-      <div class="tip-cards" id="insights-grid"></div>
-    </div>
+var STAT_COLORS = ['green','blue','purple','orange','red'];
+var d = DASHBOARD_DATA;
+var now = new Date();
 
-    <div class="tip" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;border-top:3px solid #10b981;margin-bottom:24px">
-      <div style="font-size:12px;font-weight:700;color:#10b981;letter-spacing:1px;margin-bottom:10px">💬 今日点评</div>
-      <div style="font-size:14px;color:#94a3b8;line-height:1.8" id="daily-tip"></div>
-    </div>
+// ── Live clock ──
+var _clockTimer = null;
+function startClock() {
+  if (_clockTimer) clearInterval(_clockTimer);
+  _clockTimer = setInterval(function() {
+    var el = document.getElementById('reportTime');
+    if (el) el.textContent = new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  }, 1000);
+}
+function updateClock() {
+  var el = document.getElementById('reportTime');
+  if (el) el.textContent = new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
 
-    <div class="footer">
-      <a href="https://github.com/JinkuiHuang/insurance-daily-dashboard" target="_blank">
-        📂 JinkuiHuang/insurance-daily-dashboard
-      </a>
-      <span style="margin-left:16px">via MaxClaw AI · 更新于 <span id="update-time"></span></span>
+// ── Router ──
+function getPage() {
+  var p = location.search.match(/page=(\w+)/);
+  return p ? p[1] : 'home';
+}
+
+function navigate(page) {
+  if (history.pushState) history.pushState(null, '', '?page=' + page);
+  else location.search = '?page=' + page;
+  render();
+  startClock();
+  window.scrollTo(0, 0);
+}
+
+window.addEventListener('popstate', function() { render(); window.scrollTo(0,0); });
+
+// ── Render ──
+function render() {
+  var page = getPage();
+  var app = document.getElementById('app');
+
+  if (page === 'home') {
+    app.innerHTML = renderHome();
+  } else {
+    var sec = SECTIONS.find(function(s) { return s.key === page; });
+    if (sec) { app.innerHTML = renderDetail(sec); }
+    else { app.innerHTML = renderHome(); }
+  }
+}
+
+// ── Home ──
+function renderHome() {
+  var dateStr = d.date || new Date().toLocaleDateString("zh-CN",{year:"numeric",month:"long",day:"numeric",weekday:"long"});
+  var n = [d.stats.n1, d.stats.n2, d.stats.n3, d.stats.n4, d.stats.n5 || d.insights.length];
+  var names = ['健康险要闻','三方经代','同业情报','KOL内容','热点发现'];
+
+  var statsHTML = SECTIONS.map(function(s, i) {
+    return '<div class="stat-card ' + s.color + '" onclick="navigate(\'' + s.key + '\')" role="button" aria-label="查看' + names[i] + '">' +
+      '<div class="num">' + (n[i] || 0) + '</div>' +
+      '<div class="label">' + names[i] + '</div>' +
+      '<div class="hint">点击查看 →</div></div>';
+  }).join('');
+
+  // Parse tip into 3 cards
+  var tip = d.tip;
+  var tipCards = '';
+  if (tip && typeof tip === 'object') {
+    var tips3 = [
+      { icon: '🏛️', label: '政策导向', color: 'green', text: tip.policy || '', suggest: tip.policySuggest || '' },
+      { icon: '💊', label: '产品竞争', color: 'blue', text: tip.product || '', suggest: tip.productSuggest || '' },
+      { icon: '🏪', label: '市场格局', color: 'purple', text: tip.market || '', suggest: tip.marketSuggest || '' }
+    ];
+    tipCards = tips3.map(function(t) {
+      return '<div class="tip-card ' + t.color + '" onclick="showTipDetail(' + i + ')" style="cursor:pointer" role="button" aria-label="查看' + t.label + '详情">'
+        '<div class="tc-icon">' + t.icon + '</div>' +
+        '<div class="tc-label ' + t.color + '">' + t.label + '</div>' +
+        '<div class="tc-text">' + escHtml(t.text) + '</div>' +
+        (t.suggest ? '<div class="tc-suggestion"><strong>→ </strong>' + escHtml(t.suggest) + '</div>' : '') +
+        '</div>';
+    }).join('');
+  } else if (tip && typeof tip === 'string') {
+    // Fallback: try to split by semicolons (policy; product; market)
+    var parts = tip.split('；');
+    if (parts.length < 3) parts = tip.split(';');
+    var defaultLabels = ['🏛️ 政策', '💊 产品', '🏪 市场'];
+    var defaultColors = ['green', 'blue', 'purple'];
+    tipCards = parts.slice(0, 3).map(function(p, i) {
+      var suggest = '';
+      var text = p.trim();
+      if (text.indexOf('建议') >= 0) {
+        var idx = text.indexOf('建议');
+        suggest = text.slice(idx);
+        text = text.slice(0, idx);
+      }
+      return '<div class="tip-card ' + defaultColors[i] + '">' +
+        '<div class="tc-icon">' + defaultLabels[i].split(' ')[0] + '</div>' +
+        '<div class="tc-label ' + defaultColors[i] + '">' + defaultLabels[i].split(' ')[1] + '</div>' +
+        '<div class="tc-text">' + escHtml(text.replace(/^(政策层面|产品层面|市场层面)：?/, '')) + '</div>' +
+        (suggest ? '<div class="tc-suggestion"><strong>→ </strong>' + escHtml(suggest) + '</div>' : '') +
+        '</div>';
+    }).join('');
+  }
+  if (!tipCards) {
+    tipCards = '<div class="tip-card green" style="grid-column:1/-1"><div class="tc-text">暂无点评</div></div>';
+  }
+
+
+  window.__TIP_DATA__ = [
+    { text: tip.policy || '', suggest: tip.policySuggest || '', links: (d.tip.policyLinks || []) },
+    { text: tip.product || '', suggest: tip.productSuggest || '', links: (d.tip.productLinks || []) },
+    { text: tip.market || '', suggest: tip.marketSuggest || '', links: (d.tip.marketLinks || []) }
+  ];
+
+  return '<div class="header">' +
+    '<div><div class="badge">📋 每日报告</div><h1>保险经代行业日报</h1><div class="sub">健康险 · 三方经代 · 同业情报 · KOL · 热点分析</div></div>' +
+    '<div class="header-right"><div class="date">' + escHtml(dateStr) + '</div><div class="time" id="reportTime"></div></div></div>' +
+    '<div class="stats-grid">' + statsHTML + '</div>' +
+    '<div class="tip"><div class="tip-lb">💡 今日要点</div><div class="tip-cards">' + tipCards + '</div></div>' +
+    '<div class="footer"><a href="javascript:location.reload()">🔄 刷新数据</a><div style="margin-top:10px;">数据来源：公开网络信息 · MaxClaw AI 整理 · 仅供参考</div></div>';
+}
+
+// ── Detail ──
+function renderDetail(sec) {
+  var items = d[sec.dataKey] || [];
+  var color = sec.color;
+  var dateStr = d.date || now.toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric',weekday:'long'});
+
+  var cardsHTML = items.length ? items.map(function(item, i) {
+    var tags = '';
+    if (item.hot) tags += '<span class="tag tag-hot">🔥 热点</span>';
+    if (item.isNew) tags += '<span class="tag tag-new">新</span>';
+    var descHTML = item.desc ? '<div class="dc-desc">' + escHtml(item.desc) + '</div>' : '';
+    var linkHTML = item.url ? '<a class="dc-link" href="' + escAttr(item.url) + '" target="_blank" rel="noopener">详情 →</a>' : '';
+    var metaHTML = (item.source || item.time) ?
+      '<div class="dc-meta"><span class="src" style="color:var(--' + color + ')">' + escHtml(item.source || '') + '</span><span class="tm">' + escHtml(item.time || '') + '</span></div>' : '';
+    return '<div class="detail-card ' + color + '">' +
+      '<div class="dc-top">' +
+        '<div class="dc-num">' + (i+1) + '</div>' +
+        '<div class="dc-title">' + escHtml(item.title) + '</div></div>' +
+      metaHTML + descHTML +
+      '<div class="dc-footer">' +
+        '<div class="dc-tags">' + tags + '</div>' + linkHTML + '</div></div>';
+  }).join('') : '<div class="empty-state">暂无内容</div>';
+
+
+  window.__TIP_DATA__ = [
+    { text: tip.policy || '', suggest: tip.policySuggest || '', links: (d.tip.policyLinks || []) },
+    { text: tip.product || '', suggest: tip.productSuggest || '', links: (d.tip.productLinks || []) },
+    { text: tip.market || '', suggest: tip.marketSuggest || '', links: (d.tip.marketLinks || []) }
+  ];
+
+  return '<div class="header">' +
+    '<div><div class="badge">📋 每日报告</div><h1>保险经代行业日报</h1><div class="sub">健康险 · 三方经代 · 同业情报 · KOL · 热点分析</div></div>' +
+    '<div class="header-right"><div class="date">' + escHtml(dateStr) + '</div><div class=\"time\" id=\"reportTime\"></div></div></div>' +
+    '<div class="detail-header ' + color + '">' +
+      '<div class="back-btn" onclick="navigate(\'home\')" role="button"><span class="arrow">←</span>返回</div>' +
+      '<div class="s-ico">' + sec.label.split(' ')[0] + '</div>' +
+      '<div class="info"><div class="name">' + sec.label + '</div><div class="sub">' + sec.sub + '</div></div>' +
+      '<div class="count-badge">' + items.length + ' 条</div></div>' +
+    '<div class="detail-cards">' + cardsHTML + '</div>' +
+    '<div class="footer" style="margin-top:24px"><a href="javascript:location.reload()">🔄 刷新数据</a><div style="margin-top:10px;">数据来源：公开网络信息 · MaxClaw AI 整理 · 仅供参考</div></div>';
+}
+
+function escHtml(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function escAttr(s) {
+  if (!s) return '';
+  return s.replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+render();
+startClock();
+</script>
+
+<!-- Tip detail modal -->
+<div id="tipModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:2000;align-items:center;justify-content:center;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);padding:20px;" onclick="closeTipModal(event)">
+  <div style="background:#141418;border:1px solid #1f2d45;border-radius:16px;max-width:600px;width:100%;max-height:85vh;overflow-y:auto;padding:28px 28px 24px;box-shadow:0 25px 50px rgba(0,0,0,0.4);" onclick="event.stopPropagation()">
+    <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:18px;" id="tipModalHd">
+      <div id="tipModalIcon" style="font-size:28px;flex-shrink:0;"></div>
+      <div style="flex:1;">
+        <div id="tipModalTitle" style="font-size:17px;font-weight:700;color:#f1f5f9;line-height:1.4;margin-bottom:6px;"></div>
+        <div id="tipModalSub" style="font-size:12px;color:#64748b;"></div>
+      </div>
+      <button onclick="closeTipModal()" style="background:#1f2d45;border:none;color:#94a3b8;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:16px;flex-shrink:0;">✕</button>
     </div>
+    <div id="tipModalBody" style="font-size:14px;line-height:1.75;color:#94a3b8;"></div>
   </div>
-
-  <!-- Detail sections -->
-  <div class="section-detail-wrap active" id="detail-health" style="display:none">
-    <div class="detail-header green">
-      <div class="back-btn" onclick="goHome()"><span class="arrow">‹</span> 返回</div>
-      <div class="s-ico">🏥</div>
-      <div class="info">
-        <div class="name">健康险市场要闻</div>
-        <div class="sub">金融监管 · 政策导向 · 市场规模</div>
-      </div>
-      <div class="count-badge" id="detail-health-count"></div>
-    </div>
-    <div id="detail-health-list"></div>
-  </div>
-
-  <div class="section-detail-wrap" id="detail-agent" style="display:none">
-    <div class="detail-header blue">
-      <div class="back-btn" onclick="goHome()"><span class="arrow">‹</span> 返回</div>
-      <div class="s-ico">🔍</div>
-      <div class="info">
-        <div class="name">三方经代生态</div>
-        <div class="sub">明亚 · 大童 · 泛华 · 永达理 · i云保</div>
-      </div>
-      <div class="count-badge" id="detail-agent-count"></div>
-    </div>
-    <div id="detail-agent-list"></div>
-  </div>
-
-  <div class="section-detail-wrap" id="detail-comp" style="display:none">
-    <div class="detail-header purple">
-      <div class="back-btn" onclick="goHome()"><span class="arrow">‹</span> 返回</div>
-      <div class="s-ico">🏢</div>
-      <div class="info">
-        <div class="name">同业竞争情报</div>
-        <div class="sub">众安 · 泰康在线 · 太平洋健康 · 复星联合 · 京东安联 · 好医保</div>
-      </div>
-      <div class="count-badge" id="detail-comp-count"></div>
-    </div>
-    <div id="detail-comp-list"></div>
-  </div>
-
-  <div class="section-detail-wrap" id="detail-kol" style="display:none">
-    <div class="detail-header orange">
-      <div class="back-btn" onclick="goHome()"><span class="arrow">‹</span> 返回</div>
-      <div class="s-ico">📱</div>
-      <div class="info">
-        <div class="name">KOL影响力内容</div>
-        <div class="sub">行业大V · 深度分析 · 趋势解读</div>
-      </div>
-      <div class="count-badge" id="detail-kol-count"></div>
-    </div>
-    <div id="detail-kol-list"></div>
-  </div>
-
-  <div class="section-detail-wrap" id="detail-insights" style="display:none">
-    <div class="detail-header green">
-      <div class="back-btn" onclick="goHome()"><span class="arrow">‹</span> 返回</div>
-      <div class="s-ico">💡</div>
-      <div class="info">
-        <div class="name">热点发现 &amp; 行业分析</div>
-        <div class="sub">5大关键信号</div>
-      </div>
-    </div>
-    <div id="detail-insights-list"></div>
-  </div>
-
-  <script>
-  const DASHBOARD_DATA = {"date": "2026年03月26日 星期四", "stats": {"n1": 6, "n2": 5, "n3": 10, "n4": 4}, "healthNews": [{"title": "政策强信号释放商业健康险迎来规模增长新契机", "source": "新浪财经", "time": "2026-03-16", "url": "https://finance.sina.com.cn/jjxw/2026-03-16/doc-inhreeev8838938.shtml", "hot": true, "isNew": true}, {"title": "2026年健康险迎爆发期，医疗险+长护险接棒增长，逼近万亿", "source": "新浪财经", "time": "2026-03-14", "url": "https://finance.sina.com.cn/roll/2026-03-14/doc-inhqyaqs4204700.shtml", "hot": true, "isNew": true}, {"title": "金融监管总局：代表委员建言落地健康保险服务升级", "source": "人民网", "time": "2026-03-07", "url": "http://finance.people.com.cn/n1/2026/0307/c1004-40676730.html", "hot": false, "isNew": true}, {"title": "百元保费保障再升级：2026惠民保有哪些变化", "source": "中国新闻网", "time": "2026-01-03", "url": "https://www.chinanews.com.cn/m/sh/2026/01-03/10544999.shtml", "hot": false, "isNew": false}, {"title": "健康险2026展望报告：在不确定性中寻找确定性", "source": "AgeClub", "time": "2026-01-27", "url": "https://www.ageclub.net/article-detail/8148", "hot": false, "isNew": false}, {"title": "直击三大痛点，众民保2026探索带病体健康险新范式", "source": "东方财富", "time": "2026-03-13", "url": "https://wap.eastmoney.com/a/202603133671677359.html", "hot": false, "isNew": true}], "agentNews": [{"title": "2026全国十大保险经纪公司榜单发布：元保、明亚、江泰、永达理等入选", "source": "网易", "time": "2026-03-24", "url": "https://www.163.com/dy/article/KOPC4GS705564VLP.html", "hot": true, "isNew": true}, {"title": "2026年保险中介机构行业竞争分析报告——以保通为例", "source": "腾讯新闻", "time": "2026-03-24", "url": "https://news.qq.com/rain/a/20260324A060M300", "hot": true, "isNew": true}, {"title": "i云保完成C轮融资，引入加拿大永明金融集团作为战略股东", "source": "腾讯新闻", "time": "2025-05-22", "url": "https://news.qq.com/rain/a/20250522A07ICD00", "hot": false, "isNew": false}, {"title": "保险中介四强争霸：明亚、大童、泛华、永达理的十年鏖战与未来格局", "source": "管理人", "time": "2025-07-02", "url": "https://sino-manager.com/detail/12998", "hot": false, "isNew": false}, {"title": "保险中介机构推荐哪家好？2026年高口碑保险中介机构选择指南", "source": "经济参考网", "time": "2026-03-19", "url": "http://www.cnjjwb.com/news-show-177016.html", "hot": false, "isNew": true}], "compNews": [{"title": "众安保险发布「众民保·中高端医疗险2026」：0免赔额赔付比例大幅提升", "source": "新浪财经", "time": "2026-03-13", "url": "https://finance.sina.com.cn/jjxw/2026-03-13/doc-inhqwcxf7732317.shtml", "hot": true, "isNew": true}, {"title": "众安保险：将继续深耕带病人群健康险赛道", "source": "中国经济网", "time": "2026-03-16", "url": "http://finance.ce.cn/insurance1/scrollnews/202603/t20260316_2831290.shtml", "hot": false, "isNew": true}, {"title": "2026年百万医疗险选购指南：众安尊享e生等产品差异化升级", "source": "界面新闻", "time": "2026-03-15", "url": "https://www.jiemian.com/article/14116229.html", "hot": false, "isNew": true}, {"title": "泰康在线「微医保·门诊险」获行业专业认可", "source": "TechChina", "time": "2026-01-30", "url": "https://m.tech.china.com/redian/2026/0130/012026_1805998.html", "hot": false, "isNew": false}, {"title": "复星联合健康保险：京东保长期医疗险等产品上线（2026版）", "source": "复星联合官网", "time": "2026-01-29", "url": "https://www.fosun-uhi.com/PublicInformation/BasicInformation/ProductInformation/", "hot": false, "isNew": true}, {"title": "京东安联臻爱无限医疗保险（互联网2026版）上线，外购药械不限清单", "source": "慧择", "time": "2025-12-03", "url": "https://digi.china.com/articles/20251203/202512031775254.html", "hot": false, "isNew": false}, {"title": "好医保2026：复星联合好医保系列智慧之选全面升级", "source": "搜狐", "time": "2026-01-06", "url": "https://www.sohu.com/a/973063871_122390890", "hot": false, "isNew": false}, {"title": "2026年百万医疗哪家好？少踩坑指南", "source": "界面新闻", "time": "2026-03-19", "url": "https://m.jiemian.com/article/14139041.html", "hot": false, "isNew": true}, {"title": "昆仑健康广东分公司积极开展2026年3·15金融消费者权益保护教育宣传", "source": "网易", "time": "2026-03-10", "url": "https://c.m.163.com/news/a/KNM30E460519QIKK.html", "hot": false, "isNew": false}, {"title": "0免赔医疗险如何选择更靠谱？2026年家庭健康保障推荐", "source": "腾讯新闻", "time": "2026-03-20", "url": "https://news.qq.com/rain/a/20260320A046H900", "hot": false, "isNew": true}], "kolNews": [{"title": "2026健康险迎爆发期，医疗险+长护险接棒增长，逼近万亿", "source": "新浪财经", "time": "2026-03-14", "url": "https://finance.sina.com.cn/roll/2026-03-14/doc-inhqyaqs4204700.shtml", "hot": true, "isNew": true}, {"title": "直击三大痛点，众民保2026探索带病体健康险新范式", "source": "东方财富", "time": "2026-03-13", "url": "https://wap.eastmoney.com/a/202603133671677359.html", "hot": false, "isNew": true}, {"title": "2026年互联网保险中介趋势：合规化、专业化、数字化、服务化", "source": "搜狐", "time": "2026-03-16", "url": "https://www.sohu.com/a/997055753_264724", "hot": false, "isNew": true}, {"title": "2026初保险榜单大洗牌！仅10款值得买（重疾险/医疗险/意外险）", "source": "知乎", "time": "2026-03-01", "url": "https://zhuanlan.zhihu.com/p/12288282908", "hot": false, "isNew": false}], "insights": [{"icon": "🚀", "label": "增长信号", "color": "green", "text": "2025年商业健康险原保费收入达9973亿元，距万亿仅一步之遥，政策强信号持续释放，行业进入规模增长新阶段。"}, {"icon": "💊", "label": "产品创新", "color": "blue", "text": "众安「众民保·中高端2026」0免赔额大幅优化，带病体赛道成众安、泰康在线等头部玩家核心竞争方向。"}, {"icon": "🤖", "label": "AI赋能", "color": "purple", "text": "明亚保险MyBA平台新增AI理赔协助与客户画像分析，i云保引入永明金融战略股东，保险科技加速落地。"}, {"icon": "📊", "label": "中介格局", "color": "green", "text": "2026全国十大保险经纪榜单出炉，元保首进前十，明亚、大童等头部中介竞争加剧，独立代理人生态加速形成。"}, {"icon": "💡", "label": "产品趋势", "color": "blue", "text": "2026惠民保「加量不加价」，镇江惠民保保额达412万元创全国纪录，外购药械不限清单成标配升级方向。"}], "tip": "政策红利+健康险万亿规模双重催化，经代渠道专业化升级窗口期已至。重点关注带病体医疗险与AI赋能工具双主线，头部中介平台和技术赋能型产品将是2026年核心竞争胜负手。"};
-
-  function init() {
-    const d = DASHBOARD_DATA;
-    document.getElementById('hdr-date').textContent = d.date;
-    const now = new Date();
-    document.getElementById('hdr-time').textContent = now.toLocaleTimeString('zh-CN', {hour:'2-digit',minute:'2-digit'});
-    document.getElementById('stat-n1').textContent = d.stats.n1;
-    document.getElementById('stat-n2').textContent = d.stats.n2;
-    document.getElementById('stat-n3').textContent = d.stats.n3;
-    document.getElementById('stat-n4').textContent = d.stats.n4;
-    document.getElementById('cnt-health').textContent = d.stats.n1;
-    document.getElementById('cnt-agent').textContent = d.stats.n2;
-    document.getElementById('cnt-comp').textContent = d.stats.n3;
-    document.getElementById('cnt-kol').textContent = d.stats.n4;
-    document.getElementById('sub-health').textContent = d.healthNews[0] ? d.healthNews[0].title : '';
-    document.getElementById('sub-agent').textContent = d.agentNews[0] ? d.agentNews[0].title : '';
-    document.getElementById('sub-comp').textContent = d.compNews[0] ? d.compNews[0].title : '';
-    document.getElementById('sub-kol').textContent = d.kolNews[0] ? d.kolNews[0].title : '';
-    document.getElementById('daily-tip').textContent = d.tip;
-
-    // Insights cards
-    const ig = document.getElementById('insights-grid');
-    d.insights.forEach(ins => {
-      ig.innerHTML += `<div class="tip-card {{ins.color}}">
-        <div class="tc-icon">{{ins.icon}}</div>
-        <div class="tc-label {{ins.color}}">{{ins.label}}</div>
-        <div class="tc-text">{{ins.text}}</div>
-      </div>`;
+</div>
+<script>
+function showTipDetail(idx) {
+  var data = window.__TIP_DATA__;
+  if (!data || !data[idx]) return;
+  var item = data[idx];
+  var colors = {0:"#10b981",1:"#3b82f6",2:"#8b5cf6"};
+  var icons = {0:"🏛️",1:"💊",2:"🏪"};
+  var labels = {0:"政策导向",1:"产品竞争",2:"市场格局"};
+  var iconsEl = document.getElementById("tipModalIcon");
+  iconsEl.textContent = icons[idx] || "📌";
+  iconsEl.style.background = (colors[idx] || "#10b981") + "22";
+  iconsEl.style.width = "48px"; iconsEl.style.height = "48px";
+  iconsEl.style.borderRadius = "12px";
+  iconsEl.style.display = "flex"; iconsEl.style.alignItems = "center"; iconsEl.style.justifyContent = "center";
+  document.getElementById("tipModalTitle").textContent = labels[idx] || "详情";
+  document.getElementById("tipModalSub").textContent = new Date().toLocaleDateString("zh-CN",{year:"numeric",month:"long",day:"numeric"});
+  var body = document.getElementById("tipModalBody");
+  var html = "<div style='margin-bottom:16px;padding:14px 16px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid " + (colors[idx] || "#10b981") + ";font-size:14px;color:#94a3b8;line-height:1.75;'>" + item.text + "</div>";
+  if (item.suggest) {
+    html += "<div style='margin-bottom:16px;'><div style='font-size:11px;font-weight:700;color:#64748b;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;'>→ 建议</div><div style='font-size:14px;color:#94a3b8;line-height:1.7;'>" + item.suggest + "</div></div>";
+  }
+  if (item.links && item.links.length) {
+    html += "<div><div style='font-size:11px;font-weight:700;color:#64748b;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;'>来源</div>";
+    item.links.forEach(function(l) {
+      html += "<a href='" + l.url + "' target='_blank' style='display:flex;align-items:center;gap:8px;padding:10px 12px;background:rgba(255,255,255,0.02);border-radius:8px;margin-bottom:6px;color:#3b82f6;text-decoration:none;font-size:13px;transition:background 0.15s;' onmouseover="this.style.background='rgba(59,130,246,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.02)'">";
+      html += "<span style='flex:1;'>" + l.title + "</span><span style='font-size:11px;color:#64748b;'>→</span></a>";
     });
-
-    // Detail lists
-    document.getElementById('detail-health-list').innerHTML = renderNews(d.healthNews);
-    document.getElementById('detail-agent-list').innerHTML = renderNews(d.agentNews);
-    document.getElementById('detail-comp-list').innerHTML = renderNews(d.compNews);
-    document.getElementById('detail-kol-list').innerHTML = renderNews(d.kolNews);
-    document.getElementById('detail-insights-list').innerHTML = d.insights.map((ins,i) => `
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:12px;border-top:3px solid var(--{ins.color==='green'?'green':ins.color==='blue'?'blue':'purple'})">
-        <div style="font-size:22px;margin-bottom:8px">{ins.icon}</div>
-        <div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;color:var(--{ins.color==='green'?'green':ins.color==='blue'?'blue':'purple'})">{ins.label}</div>
-        <div style="font-size:14px;color:var(--text2);line-height:1.8">{ins.text}</div>
-      </div>`).join('');
-
-    document.getElementById('detail-health-count').textContent = d.stats.n1 + ' 条';
-    document.getElementById('detail-agent-count').textContent = d.stats.n2 + ' 条';
-    document.getElementById('detail-comp-count').textContent = d.stats.n3 + ' 条';
-    document.getElementById('detail-kol-count').textContent = d.stats.n4 + ' 条';
-    document.getElementById('update-time').textContent = d.date;
+    html += "</div>";
   }
+  body.innerHTML = html;
+  var modal = document.getElementById("tipModal");
+  modal.style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+function closeTipModal(e) {
+  if (e && e.target !== e.currentTarget) return;
+  document.getElementById("tipModal").style.display = "none";
+  document.body.style.overflow = "";
+}
+document.addEventListener("keydown", function(e){ if(e.key==="Escape") closeTipModal(); });
+</script>
 
-  function renderNews(news) {
-    return news.map((n,i) => `
-      <a class="news-item" href="${n.url}" target="_blank">
-        <div class="ni-num">${i+1}</div>
-        <div class="ni-body">
-          <div class="ni-title">${n.title}${n.hot?' 🔥':''}${n.isNew?' <span style="background:#10b981;color:#fff;font-size:10px;padding:1px 6px;border-radius:10px;margin-left:4px;font-weight:700">NEW</span>':''}</div>
-          <div class="ni-meta"><span class="ni-source">${n.source}</span><span class="ni-dot">·</span><span class="ni-time">${n.time}</span></div>
-        </div>
-        <div class="ni-arrow">›</div>
-      </a>`).join('');
-  }
-
-  function showSection(key) {
-    document.getElementById('page-home').classList.remove('page-active');
-    document.querySelectorAll('.section-detail-wrap').forEach(el => el.style.display = 'none');
-    const el = document.getElementById('detail-' + key);
-    if (el) { el.style.display = 'block'; }
-    window.scrollTo(0,0);
-  }
-
-  function goHome() {
-    document.getElementById('page-home').classList.add('page-active');
-    document.querySelectorAll('.section-detail-wrap').forEach(el => el.style.display = 'none');
-    window.scrollTo(0,0);
-  }
-
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') goHome(); });
-  init();
-  </script>
 </body>
 </html>
