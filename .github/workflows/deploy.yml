@@ -9,14 +9,15 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+      - name: Setup Cloudflare
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: 54a09ae3b4bbd21e7bf04cf436e6145a
-          projectName: insurance-daily-dashboard
-          directory: dist
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy
+        run: |
+          npx wrangler pages deploy dist \
+            --project-name=insurance-daily-dashboard \
+            --account-id=54a09ae3b4bbd21e7bf04cf436e6145a
