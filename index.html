@@ -217,69 +217,81 @@
     <div class="section-header">
       <div class="sh-icon">💡</div>
       <h2>💡 热点发现 & 行业分析</h2>
+      <span class="count" id="count-insight">0 条</span>
     </div>
     <div class="insights-grid" id="insights-grid"></div>
   </div>
 
-  <div class="tip-box">
+  <div class="tip-box" id="tip-box">
     <div class="tip-title">💬 今日点评</div>
     <div class="tip-text" id="tip-text"></div>
   </div>
 
   <div class="footer">
-    via <strong>MaxClaw AI</strong> · GitHub Auto-Push · 数据来源：网络搜索
+    via MaxClaw AI · 保险经代行业日报 · 每日自动更新
   </div>
-
 </div>
 
 <script>
-const DASHBOARD_DATA = {"date": "2026年03月29日 星期日", "stats": {"n1": 8, "n2": 6, "n3": 10, "n4": 5}, "healthNews": [{"title": "政策强信号释放商业健康险迎来规模增长新契机", "source": "新浪财经", "time": "2026-03-14", "url": "https://finance.sina.com.cn/jjxw/2026-03-14/doc-inhqwqnw3838074.shtml", "hot": true, "isNew": true}, {"title": "金融监管总局：代表委员建言落地健康保险服务升级（2026全国两会）", "source": "人民网", "time": "2026-03-07", "url": "http://finance.people.com.cn/n1/2026/0307/c1004-40676730.html", "hot": false, "isNew": false}, {"title": "广东金融监管局等七部门印发推动健康保险高质量发展指导意见", "source": "武汉金融局", "time": "2026-02-24", "url": "https://jrj.wuhan.gov.cn/ztzl_57/xyrd/dfljr/202602/t20260224_2731255.shtml", "hot": false, "isNew": false}, {"title": "众安保险发布众民保中高端医疗险2026，深耕带病体健康保障", "source": "和讯网", "time": "2026-03-12", "url": "http://insurance.hexun.com/2026-03-12/223681193.html", "hot": true, "isNew": true}, {"title": "2026年百万医疗险选购指南：看懂众安尊享e生等三款产品的差异化", "source": "界面新闻", "time": "2026-03-19", "url": "https://www.jiemian.com/article/14116229.html", "hot": false, "isNew": true}, {"title": "百元保费保障再升级：2026惠民保有哪些变化", "source": "中国新闻网", "time": "2026-01-03", "url": "https://www.chinanews.com.cn/m/sh/2026/01-03/10544999.shtml", "hot": true, "isNew": false}, {"title": "多地2026版惠民保产品出炉，累计保额突破400万", "source": "证券时报", "time": "2026-01-03", "url": "https://www.stcn.com/article/detail/3483293.html", "hot": false, "isNew": false}, {"title": "国家金融监督管理总局发布《关于推动健康保险高质量发展的指导意见》", "source": "国家金融监督管理总局", "time": "2025-09-30", "url": "https://www.nfra.gov.cn/cn/view/pages/ItemDetail.html?docId=1228139&itemId=915", "hot": false, "isNew": false}], "agentNews": [{"title": "i云保发布全面AI战略，以自研技术引擎重塑保险服务新生态", "source": "新浪财经", "time": "2026-01-16", "url": "https://finance.sina.com.cn/jjxw/2026-01-16/doc-inhhnuuy0746436.shtml", "hot": true, "isNew": false}, {"title": "2026年保险中介机构行业竞争分析报告：以保通为例", "source": "腾讯新闻", "time": "2026-03-24", "url": "https://news.qq.com/rain/a/20260324A060M300", "hot": false, "isNew": true}, {"title": "保险中介四强争霸：明亚、大童、泛华、永达理的十年鏖战与未来格局", "source": "管理学家", "time": "2025-07-02", "url": "https://sino-manager.com/detail/12998", "hot": false, "isNew": false}, {"title": "明亚保险经纪MyBA持续迭代，新增AI理赔协助与客户画像分析功能", "source": "腾讯新闻", "time": "2026-03-24", "url": "https://news.qq.com/rain/a/20260324A060M300", "hot": false, "isNew": true}, {"title": "泛华保险陷90亿元产品兑付风波，监管立案调查", "source": "证券时报", "time": "2025-03-09", "url": "https://stcn.com/article/detail/1571162.html", "hot": true, "isNew": false}, {"title": "2026全国保险中介综合服务实力前十排名榜单发布", "source": "知乎", "time": "2026-01-15", "url": "https://zhuanlan.zhihu.com/p/1995086089866716575", "hot": false, "isNew": false}], "compNews": [{"title": "众安保险尊享e生百万医疗保险2026版上线，0免赔保障升级", "source": "众安保险官网", "time": "2026-03-28", "url": "https://m.zhongan.com/gp/91228109", "hot": true, "isNew": true}, {"title": "众安保险发布众民保中高端医疗险2026，0免赔赔付比例提升", "source": "和讯网", "time": "2026-03-12", "url": "http://insurance.hexun.com/2026-03-12/223681193.html", "hot": false, "isNew": true}, {"title": "泰康在线全面启动2026年315金融消费者权益保护教育宣传活动", "source": "泰康在线", "time": "2026-03-13", "url": "https://tk.cn/tkcms/publish/article/detail/716/922185_0.html", "hot": false, "isNew": true}, {"title": "泰康附加悦选健康医疗保险（费率可调）2026年1月上市", "source": "泰康人寿", "time": "2026-01-24", "url": "https://m.taikanglife.com/publicinfonew/specialinfo/longtermmedical/insuranceinfor/list_515_1.html", "hot": false, "isNew": false}, {"title": "复星联合健康保险好医保系列：2026年健康保障的智慧之选", "source": "搜狐", "time": "2026-01-06", "url": "https://www.sohu.com/a/973063871_122390890", "hot": false, "isNew": false}, {"title": "复星联合附加京东保长期医疗保险（费率可调）2026年1月上市", "source": "复星联合健康保险", "time": "2026-01-29", "url": "https://www.fosun-uhi.com/PublicInformation/BasicInformation/ProductInformation/", "hot": false, "isNew": false}, {"title": "蚂蚁保好医保升级，促进高端医疗服务普惠化", "source": "新浪财经", "time": "2025-06-23", "url": "https://finance.sina.com.cn/jjxw/2025-06-23/doc-infazmiq9680249.shtml", "hot": false, "isNew": false}, {"title": "昆仑健康保险启动2026年315活动，六大举措并举构建大消保", "source": "中国日报网", "time": "2026-03-09", "url": "https://cn.chinadaily.com.cn/a/202603/09/WS69ae8b78a310942cc49a23aa.html", "hot": false, "isNew": true}, {"title": "昆仑健康岁享金生终身护理保险热销，固收增额寿2026高替", "source": "知乎", "time": "2026-02-05", "url": "https://zhuanlan.zhihu.com/p/1996600012268920914", "hot": false, "isNew": false}, {"title": "慧择联合京东安联推出臻爱无限2026，五种既往症可保可赔", "source": "中华网", "time": "2025-12-03", "url": "https://digi.china.com/articles/20251203/202512031775254.html", "hot": false, "isNew": false}], "kolNews": [{"title": "2026保险业前瞻：报行合一有望带动行业费用率改善", "source": "21财经", "time": "2026-01-23", "url": "https://www.21jingji.com/article/20260123/herald/9b402ee5470980a9a1de16aa2efeb262.html", "hot": true, "isNew": false}, {"title": "2026年全球保险行业展望（德勤中国）", "source": "德勤中国", "time": "2025-12-03", "url": "https://www.deloitte.com/cn/zh/Industries/insurance/perspectives/2026-insurance-industry-outlook.html", "hot": false, "isNew": false}, {"title": "2026年线上保险平台竞争分析报告出炉", "source": "网易", "time": "2026-03-29", "url": "https://www.163.com/dy/article/KP44TQNR0518Q1VT.html", "hot": false, "isNew": true}, {"title": "保险中介行业核心竞争力分析：明亚、大童、泛华、永达理哪家强", "source": "搜狐", "time": "2026-03-16", "url": "https://www.sohu.com/a/997055753_264724", "hot": false, "isNew": true}, {"title": "健康险2026展望报告：在不确定性中寻找确定性，五大增长点浮现", "source": "AgeClub", "time": "2026-01-27", "url": "https://www.ageclub.net/article-detail/8148", "hot": false, "isNew": false}], "insights": [{"icon": "📈", "title": "政策红利持续释放", "desc": "2026年《政府工作报告》两次提及商业健康保险，叠加金融监管总局指导意见落地，行业进入政策加速期，带病体投保、长期医疗险创新路径进一步明晰。"}, {"icon": "🤖", "title": "AI全面渗透保险中介", "desc": "i云保宣布60%流程AI化，明亚MyBA引入AI理赔协助，大童、保通等机构加速布局智能工具，科技能力正成为中介机构核心竞争壁垒。"}, {"icon": "💊", "title": "带病体成为产品创新主战场", "desc": "众安众民保2026、京东安联臻爱无限2026等主流产品均强化既往症可保可赔，带病体医疗险赛道竞争白热化。"}, {"icon": "⚠️", "title": "泛华兑付风波警示中介合规风险", "desc": "泛华保险90亿元产品兑付危机遭监管立案，反映部分中小中介在产品设计与资金管理上存在合规漏洞，行业信任修复仍需时日。"}, {"icon": "📊", "title": "分红险崛起，固收+浮动成主流", "desc": "预定利率维持低位背景下，分红险凭借固收+浮动特性成为2026年市场主流，长期医疗保险费率可调机制加速产品形态分化。"}], "tip": "政策层与市场端同向发力，商业健康险正处于量质齐升的关键窗口期。经代渠道应重点关注带病体医疗险与长期医疗险两大方向，同时警惕部分中小机构的合规风险。"};
-function init() {
-  const d = DASHBOARD_DATA;
-  document.getElementById('reportDate').textContent = d.date;
-  document.getElementById('reportTime').textContent = new Date().toLocaleTimeString('zh-CN', {hour:'2-digit',minute:'2-digit'});
-  renderStats(d.stats);
-  renderNews('health', d.healthNews);
-  renderNews('agent', d.agentNews);
-  renderNews('comp', d.compNews);
-  renderNews('kol', d.kolNews);
-  renderInsights(d.insights);
+var DASHBOARD_DATA = {"date":"2026年3月30日 星期一","stats":{"n1":5,"n2":4,"n3":10,"n4":5},"healthNews":[{"title":"2026保险监管"体检"开启，17家险企及资管机构接受全面核查","source":"新浪财经","time":"6天前","url":"https://finance.sina.cn/insurance/hydt/2026-03-24/detail-inhsavws1672384.d.html","hot":true,"isNew":true},{"title":"金融监管总局：代表委员建言落地健康保险服务升级（2026年全国两会）","source":"人民网","time":"3月7日","url":"http://finance.people.com.cn/n1/2026/0307/c1004-40676730.html","hot":true,"isNew":false},{"title":"众安保险发布"众民保·中高端医疗险2026"，深耕带病体健康保障","source":"和讯网","time":"3月12日","url":"http://insurance.hexun.com/2026-03-12/223681193.html","hot":true,"isNew":false},{"title":"政策强信号：商业健康险迎来规模增长新契机（2026政府工作报告）","source":"东方财富","time":"3月13日","url":"https://biz.eastmoney.com/a/202603143671958073.html","hot":false,"isNew":false},{"title":"百元保费保障"再升级"：2026惠民保全国多地正式生效","source":"封面新闻","time":"1月2日","url":"https://www.thecover.cn/news/58pknU9bYjWH90qSdq8Jkw==","hot":false,"isNew":false}],"agentNews":[{"title":"2026年2月中国保险经纪公司前十名最新排名！明亚、大童、泛华、永达理深度解读","source":"网易","time":"2月26日","url":"https://www.163.com/dy/article/KMMH25NR05319BIW.html","hot":true,"isNew":false},{"title":"i云保发布全面AI战略，60%产品与流程完成AI化重构","source":"新浪财经","time":"1月16日","url":"https://finance.sina.com.cn/jjxw/2026-01-16/doc-inhhnuuy0746436.shtml","hot":true,"isNew":false},{"title":"2026保险中介机构行业竞争分析：保通、明亚持续深化AI理赔与客户画像功能","source":"腾讯新闻","time":"6天前","url":"https://news.qq.com/rain/a/20260324A060M300","hot":false,"isNew":false},{"title":"保险中介四强争霸：明亚、大童、泛华、永达理十年鏖战与未来格局","source":"新浪财经","time":"6月27日","url":"https://finance.sina.com.cn/roll/2025-06-27/doc-infcptny3552703.shtml","hot":false,"isNew":false}],"compNews":[{"title":"2026年百万医疗险选购指南：众安尊享e生等三款产品核心差异","source":"界面新闻","time":"3月15日","url":"https://www.jiemian.com/article/14116229.html","hot":true,"isNew":false},{"title":"众民保·中高端医疗险2026发布：0免赔额赔付比例优化，带病体可投保","source":"众安保险官网","time":"3月12日","url":"https://m.zhongan.com/gp/90166837","hot":true,"isNew":false},{"title":"泰康在线十周年：微医保·门诊险获行业专业认可","source":"中华网","time":"1月30日","url":"https://m.tech.china.com/redian/2026/0130/012026_1805998.html","hot":false,"isNew":false},{"title":"泰康在线2026新品：吉祥相伴定期寿险正式上市","source":"泰康人寿","time":"3月19日","url":"https://m.taikanglife.com/mobile/uploader/pubProductFile/2026/03/19/f9663f69-2ee3-4411-bd72-454fad805c54.pdf","hot":false,"isNew":false},{"title":"复星联合健康保险新品：附加京东保长期医疗险（费率可调）2026版上市","source":"复星联合官网","time":"1月29日","url":"https://www.fosun-uhi.com/PublicInformation/BasicInformation/ProductInformation/","hot":false,"isNew":false},{"title":"慧择联合京东安联推出"臻爱无限2026"，外购药械纳入基础责任","source":"中华网","time":"12月3日","url":"https://digi.china.com/articles/20251203/202512031775254.html","hot":false,"isNew":false},{"title":"好医保·长期医疗（旗舰版2025）持续迭代，蚂蚁保"金选"推动产品对比功能升级","source":"新华网","time":"7月24日","url":"http://www.news.cn/tech/20240724/13a788c7ba614a79bd6a2238b015432d/c.html","hot":false,"isNew":false},{"title":"2026全网热销四款百万医疗横评：人保金医保3号、蓝医保、众安尊享e生2026、好医保旗舰版","source":"什么值得买","time":"6天前","url":"https://post.smzdm.com/p/apq85q5x","hot":false,"isNew":false},{"title":"昆仑健康保险启动2026"3·15"活动，六大举措构建"大消保"教育宣传格局","source":"中国日报网","time":"3月9日","url":"https://cn.chinadaily.com.cn/a/202603/09/WS69ae8b78a310942cc49a23aa.html","hot":false,"isNew":false},{"title":"和谐健康保险全面启动2026年"3·15"金融消费者权益保护教育宣传活动","source":"和谐健康官网","time":"3月","url":"https://www.hexiehealth.com/","hot":false,"isNew":false}],"kolNews":[{"title":"2026保险业前瞻："报行合一"有望带动行业费用率改善","source":"21财经","time":"1月23日","url":"https://www.21jingji.com/article/20260123/herald/9b402ee5470980a9a1de16aa2efeb262.html","hot":true,"isNew":false},{"title":"健康险2026展望报告：在不确定性中寻找确定性——五大确定性增长点","source":"AgeClub","time":"1月27日","url":"https://www.ageclub.net/article-detail/8148","hot":true,"isNew":false},{"title":"2026年线上保险平台竞争分析：五大头部热门平台深度解读","source":"网易","time":"2天前","url":"https://www.163.com/dy/article/KP44TQNR0518Q1VT.html","hot":false,"isNew":true},{"title":"2026保险中介机构推荐：行业核心竞争力分析与选型指南","source":"搜狐","time":"3月16日","url":"https://www.sohu.com/a/997055753_264724","hot":false,"isNew":false},{"title":"德勤2026年全球保险行业展望：AI技术驱动行业前所未有转型","source":"德勤中国","time":"12月3日","url":"https://www.deloitte.com/cn/zh/Industries/insurance/perspectives/2026-insurance-industry-outlook.html","hot":false,"isNew":false}],"insights":[{"title":"监管"全面体检"启动","desc":"金融监管总局对17家险企开启现场检查，覆盖财险、寿险、养老险、保险资管四大领域，"全面体检+整改回头看"双重体系建立，经代渠道合规压力陡增。"},{"title":"健康险规模站上万亿台阶","desc":"2025年商业健康险迈过万亿元门槛，头部险企加速布局健康管理公司及实体医疗机构，"保险+医疗"生态整合成为竞争主战场。"},{"title":"AI全面渗透保险经代","desc":"i云保60%流程AI化、明亚MyBA新增AI理赔协助，智能化从产品创新向服务全链路延伸，具备技术落地能力的经代机构将抢占先机。"},{"title":"带病体投保成产品创新焦点","desc":"众民保中高端2026等新品将带病体保障作为核心差异化卖点，0免赔额赔付比例优化，百万医疗险竞争进入"非标体深水区"。"},{"title":"长期护理险试点扩大催生新市场","desc":"长期护理保险纳入常态化监管，DRG/DIP改革倒逼医疗机构控本，护理险、失能险市场空间加速释放。"}],"tip":"金融监管"体检"剑指17家机构，经代渠道合规成本上升，利好具备科技合规能力的头部中介；众安"众民保2026"深耕带病体市场，差异化竞争从产品设计向服务端延伸，建议重点关注。"};</script>
+<script>
+(function() {
+  var d = DASHBOARD_DATA;
+  // date/time
+  var parts = d.date.match(/(\d+)年(\d+)月(\d+)日/);
+  document.getElementById('reportDate').textContent = parts[1] + '年' + parts[2] + '月' + parts[3] + '日';
+  var now = new Date();
+  document.getElementById('reportTime').textContent = now.toLocaleTimeString('zh-CN', {hour:'2-digit', minute:'2-digit'});
+
+  // stats
+  var colors = ['green','blue','purple','orange','red'];
+  var labels = ['健康险要闻','三方经代','同业竞品','KOL内容','热点洞察'];
+  var hints = ['点击查看详情','点击查看详情','点击查看详情','点击查看详情','点击查看详情'];
+  var nums = [d.stats.n1, d.stats.n2, d.stats.n3, d.stats.n4, d.insights.length];
+  var grid = document.getElementById('statsGrid');
+  for (var i = 0; i < 5; i++) {
+    var card = document.createElement('div');
+    card.className = 'stat-card ' + colors[i];
+    card.innerHTML = '<div class="num">' + nums[i] + '</div><div class="label">' + labels[i] + '</div><div class="hint">' + hints[i] + '</div>';
+    grid.appendChild(card);
+  }
+
+  // news
+  function renderNews(id, list) {
+    var el = document.getElementById(id);
+    document.getElementById('count-' + id.replace('news-','')).textContent = list.length + ' 条';
+    if (!list.length) { el.innerHTML = '<div class="no-data">暂无数据</div>'; return; }
+    list.forEach(function(item) {
+      var tags = '';
+      if (item.hot) tags += '<span class="tag tag-hot">🔥热点</span>';
+      if (item.isNew) tags += '<span class="tag tag-new">NEW</span>';
+      var div = document.createElement('div');
+      div.className = 'news-item';
+      div.innerHTML = '<div class="content"><div class="title" title="' + item.title + '">' + tags + item.title + '</div><div class="meta"><span>📰 ' + item.source + '</span><span>🕐 ' + item.time + '</span></div></div>';
+      div.onclick = function() { if (item.url) window.open(item.url, '_blank'); };
+      el.appendChild(div);
+    });
+  }
+
+  renderNews('news-health', d.healthNews);
+  renderNews('news-agent', d.agentNews);
+  renderNews('news-comp', d.compNews);
+  renderNews('news-kol', d.kolNews);
+
+  // insights
+  var ig = document.getElementById('insights-grid');
+  document.getElementById('count-insight').textContent = d.insights.length + ' 条';
+  var icons = ['🔍','💰','🤖','🏥','📊'];
+  d.insights.forEach(function(item, i) {
+    var div = document.createElement('div');
+    div.className = 'insight-card';
+    div.innerHTML = '<div class="ic-top"><span class="ic-icon">' + icons[i] + '</span><span class="ic-title">' + item.title + '</span></div><div class="ic-desc">' + item.desc + '</div>';
+    ig.appendChild(div);
+  });
+
+  // tip
   document.getElementById('tip-text').textContent = d.tip;
-}
-function renderStats(stats) {
-  const map = [
-    {key:'n1',label:'健康险要闻',cls:'green'},
-    {key:'n2',label:'三方经代',cls:'blue'},
-    {key:'n3',label:'同业情报',cls:'orange'},
-    {key:'n4',label:'KOL内容',cls:'purple'},
-  ];
-  const cats = ['health','agent','comp','kol'];
-  const el = document.getElementById('statsGrid');
-  el.innerHTML = map.map((m,i) =>
-    '<div class="stat-card ' + m.cls + '" onclick="document.querySelector('[data-cat=' + cats[i] + ']').scrollIntoView({behavior:'smooth'})">' +
-    '<div class="num">' + d.stats[m.key] + '</div>' +
-    '<div class="label">' + m.label + '</div>' +
-    '</div>'
-  ).join('');
-}
-function renderNews(cat, items) {
-  document.getElementById('count-' + cat).textContent = (items.length || 0) + ' 条';
-  const el = document.getElementById('news-' + cat);
-  if (!items || items.length === 0) { el.innerHTML = '<div class=no-data>暂无数据</div>'; return; }
-  el.innerHTML = items.map(item => {
-    const tags = (item.hot ? '<span class=tag tag-hot>🔥 热点</span>' : '') + (item.isNew ? '<span class=tag tag-new>🆕 新</span>' : '');
-    return '<div class=news-item onclick="window.open(\'' + item.url + '\',\'_blank\')">' +
-      tags + '<div class=content><div class=title>' + item.title + '</div><div class=meta><span>' + item.source + '</span><span>' + item.time + '</span></div></div></div>';
-  }).join('');
-}
-function renderInsights(insights) {
-  const el = document.getElementById('insights-grid');
-  if (!insights || insights.length === 0) { el.innerHTML = '<div class=no-data>暂无数据</div>'; return; }
-  el.innerHTML = insights.map(i =>
-    '<div class=insight-card><div class=ic-top><span class=ic-icon>' + i.icon + '</span><span class=ic-title>' + i.title + '</span></div><div class=ic-desc>' + i.desc + '</div></div>'
-  ).join('');
-}
-init();
+})();
 </script>
 </body>
 </html>
